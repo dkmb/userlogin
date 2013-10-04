@@ -1,7 +1,7 @@
 <div class="userlogin-loginbox">
   <ul class="userlogin-loginbox-list">
     <li class="userlogin-loginbox-item">
-      <%= link_to "Register", root_path, class: "userlogin-loginbox-link"  %>
+      <%= link_to "Register", new_user_path, class: "userlogin-loginbox-link"  %>
     </li>
     <li class="userlogin-loginbox-item">
       <%= link_to "Login", root_path, class: "userlogin-loginbox-link" %>
@@ -9,20 +9,19 @@
   </ul>
 </div>
 
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <article>
-        <header>
-          <h2><%= link_to(user.username, user) %></h2>
-        </header>
-        <p>
-          Password: <%= user.password %>
-        </p>
-        <p>
-          Email: <%= user.email %>
-        </p>
-      </article>
-    </li>
-  <% end %>
-</ul>
+<div class="userlogin-user-listing">
+  <ul class="userlogin-user-list">
+    <% @users.each do |user| %>
+      <li class="userlogin-user-item">
+        <article class="userlogin-user-item-article">
+          <h2 class="userlogin-user-listing-title">
+            <%= link_to(user.username, user, class: "userlogin-user-listing-link") %>
+          </h2>
+          <p class="userlogin-user-listing-email">
+            <%= user.email %>
+          </p>
+        </article>
+      </li>
+    <% end %>
+  </ul>
+</div>

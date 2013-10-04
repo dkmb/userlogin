@@ -104,7 +104,10 @@ _* indicates that there is an associated code example_
     ```
 
 ## Iteration Two
-> Design and Testing
+> Design and Implementation
+---
+> The sample app is now deployed to http://radiant-waters-7292.herokuapp.com and will be updated along with this repo
+---
 - design mockup can be found in app/assets/images/design
   - available as both .psd (for editing) and .png (for quick reference)
 - create _colors.css.scss in app/assets/stylesheets
@@ -118,6 +121,7 @@ _* indicates that there is an associated code example_
     $content_color: #ffffff;
   ```
 - create [styles.css.scss][7] in app/assets/stylesheets*
+- create [index.css.scss][8] in app/assets/stylesheets*
 
 
 ## Iteration Three
@@ -126,7 +130,7 @@ _* indicates that there is an associated code example_
 ---
 ##Code
 
-[1] *_errors.html.erb* (Iteration One)
+[1]: *_errors.html.erb* (Iteration One)
 ---
 
 ```
@@ -149,8 +153,7 @@ _* indicates that there is an associated code example_
 <% end %>
 ```
 
-
-[2] *_flashes.html.erb* (Iteration One)
+[2]: *_flashes.html.erb* (Iteration One)
 ---
 
 ```
@@ -159,8 +162,7 @@ _* indicates that there is an associated code example_
 <% end %>
 ```
 
-
-[3] *simple _form.html.erb* (Iteration One)
+[3]: *simple _form.html.erb* (Iteration One)
 ---
 
 ```
@@ -187,7 +189,7 @@ _* indicates that there is an associated code example_
 <% end %>
 ```
 
-[4] *simple index.html.erb* (Iteration One)
+[4]: *simple index.html.erb* (Iteration One)
 ---
 
 ```
@@ -210,7 +212,7 @@ _* indicates that there is an associated code example_
 </ul>
 ```
 
-[5] *simple show.html.erb* (Iteration One)
+[5]: *simple show.html.erb* (Iteration One)
 ---
 
 ```
@@ -238,8 +240,7 @@ _* indicates that there is an associated code example_
 </article>
 ```
 
-
-[6] *_nav.html.erb* (Iteration One)
+[6]: *_nav.html.erb* (Iteration One)
 ---
 
 ```

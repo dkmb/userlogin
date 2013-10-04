@@ -1,6 +1,66 @@
+@import "colors";
+
+/*
+ * Login Box
+ */
 .userlogin-loginbox {
-	
+	text-align: center;
 }
 .userlogin-loginbox-list {
-	
+	margin: 0px;
+	padding: 0px;
+}
+.userlogin-loginbox-item {
+	list-style-type: none;
+	padding: 10px;
+}
+.userlogin-loginbox-link:link, .userlogin-loginbox-link:visited {
+	display: inline-block;
+	height: 100px;
+	width: 350px;
+	background-color: $dark_color;
+	line-height: 100px;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 2em;
+	border: 1px solid $darkest_color;
+}
+
+/*
+ * User Listing
+ */
+.userlogin-user-listing {
+	border: 2px solid	#ccc;
+	padding: 20px;
+	text-align: center;
+	background-color: #fff;
+	width: 250px;
+	margin: 0px auto;
+}
+.userlogin-user-list {
+	text-align: left;
+}
+.userlogin-user-item {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+.userlogin-user-item-article {
+	padding: 5px 0px 5px 0px;
+}
+.userlogin-user-listing-title {
+	padding: 0px;
+	margin: 0px;
+}
+.userlogin-user-listing-link:link, .userlogin-user-listing-link:visited {
+	color: #000;
+	text-decoration: none;
+}
+.userlogin-user-listing-email {
+	font-style: italic;
+	margin: 0px;
+	color: 
+	#999;
+	font-size: .9em;
 }
