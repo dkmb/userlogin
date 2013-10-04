@@ -8,9 +8,14 @@
 </head>
 <body>
 
-<%= render "layouts/nav" %>
-
-<%= yield %>
+<%= render "layouts/header" %>
+<%= render "layouts/navigation" %>
+<div id="userlogin-container">
+  <div id="userlogin-content">
+    <%= yield %>
+  </div>
+</div>
+<%= render "layouts/footer" %>
 
 </body>
 </html>

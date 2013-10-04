@@ -1,3 +1,14 @@
+<div class="userlogin-loginbox">
+  <ul class="userlogin-loginbox-list">
+    <li class="userlogin-loginbox-item">
+      <%= link_to "Register", root_path, class: "userlogin-loginbox-link"  %>
+    </li>
+    <li class="userlogin-loginbox-item">
+      <%= link_to "Login", root_path, class: "userlogin-loginbox-link" %>
+    </li>
+  </ul>
+</div>
+
 <ul>
   <% @users.each do |user| %>
     <li>
