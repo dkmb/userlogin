@@ -16,81 +16,86 @@ _* indicates that there is an associate code example_
 - users_controller.rb
   - add methods:  
       index, show, edit, update, new, create, destroy  
-    add private method: 
-
-    - ```ruby 
-    def user_params  
-      params.require(:user).permit(:username, :password, :email)  
-    end  
-    ```ruby
+    add private method:
+     
+    ```ruby 
+        def user_params  
+          params.require(:user).permit(:username, :password, :email)  
+        end  
+    ```
 - Create views templates in users directory:
   - edit, index, new, show
 - Add index to routes.rb
-  - root "users#index"
+  
+  ```ruby
+  root "users#index"
+  ```
 - add validations to models/user.rb (simple validation for now)
-
-  - ```ruby
+  
+  ```ruby
     validates :username, presence: true  
     validates :password, presence: true  
     validates :email, presence: true  
-  ```ruby
+  ```
 - add _errors.html.erb template to views/shared*
 - add _flashes.html.erb template to views/layouts*
 - add simple _form.html.erb partial to views/users*
 - include partial in edit and new templates:
-
-  - ```ruby
-  <%= render 'form' %>
+  
   ```ruby
+  <%= render 'form' %>
+  ```
 - add simple index.html.erb template to views/users*
 - add simple show.html.erb template to views/users*
 - add select all query to index action in users_controller.rb
-  - @users = User.all
+  
+  ```ruby
+  @users = User.all
+  ```
 - add single item selection to show and edit actions in users_controller.rb
   
-  - ```ruby
-  @user = User.find(params[:id])
   ```ruby
+  @user = User.find(params[:id])
+  ```
 - add update item to update action in users_controller.rb
   
-  - ```ruby
+  ```ruby
     @user = User.find(params[:id])  
     if @user.update(user_params)  
       redirect_to @user, notice: "User successfully updated!"  
     else  
       render :edit  
     end  
-  ```ruby
+  ```
 - add new item to new action in users_controller.rb
-
-  - ```ruby
-  @user = User.new
+  
   ```ruby
+  @user = User.new
+  ```
 - add create item to create action in users_controller.rb
   
-  - ```ruby
+  ```ruby
   @user = User.new(user_params)  
   if @user.save  
     redirect_to @user, notice: "User successfully created!"  
   else  
     render :new  
   end  
-  ```ruby
+  ```
 - add destroy item to destroy action in users_controller.rb
   
-  - ```ruby
+  ```ruby
   @user = User.find(params[:id])  
   @user.destroy  
   redirect_to users_url, alert: "User successfully deleted!"  
-  ```ruby
+  ```
 - create _nav.html.erb partial in views/layouts*
 - add the call for our partial to views/layouts/application.html.erb
   - (this can go above the call to yield for now)  
-  
-    - ```ruby
-    <%= render "layouts/nav" %>
+    
     ```ruby
-
+    <%= render "layouts/nav" %>
+    ```
 
 ---
 ##Code
@@ -116,7 +121,7 @@ _errors.html.erb
   </ul>
 </section>
 <% end %>
-```ruby
+```
 
 
 _flashes.html.erb
@@ -126,7 +131,7 @@ _flashes.html.erb
 <% flash.each do |key, value| %>
   <%= content_tag(:p, value, :class => "flash #{key}") %>
 <% end %>
-```ruby
+```
 
 
 simple _form.html.erb
@@ -154,7 +159,7 @@ simple _form.html.erb
     </p>
   </fieldset>
 <% end %>
-```ruby
+```
 
 simple index.html.erb
 ---
@@ -177,7 +182,7 @@ simple index.html.erb
     </li>
   <% end %>
 </ul>
-```ruby
+```
 
 simple show.html.erb
 ---
@@ -205,7 +210,7 @@ simple show.html.erb
     </nav>
   </footer>
 </article>
-```ruby
+```
 
 
 _nav.html.erb
@@ -222,4 +227,4 @@ _nav.html.erb
     </li>
   </ul>
 </nav>
-```ruby
+```
