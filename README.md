@@ -1,7 +1,7 @@
 # Simple User Login System
 
 ---
-> A step by step recording of the creation of a simple user login system.
+> A step by step recording of the creation of a simple user login system. This is not considered a tutorial for people new to Ruby on Rails. In fact, it isn't much of a tutorial at all. It might be considered a guide for Rails developers that are just starting out. As someone that is new to Rails, I thought it would be helpful to document the creation of an app. I chose this sample login app because I need a login system for a closed source project I am working on. 
 
 _* indicates that there is an associate code example_
 
@@ -10,54 +10,58 @@ _* indicates that there is an associate code example_
 ## Iteration One
 
 - rails new userlogin -T
+  - Creates a new rails app (without default testing suite), navigate to the new directory once it is created
 - rails g resource user username:string password:string email:string
+  - Create a new resource which includes the model, view, controller, and routes
 - rake db:migrate
+  - Creates the database
 - rails s
-- users_controller.rb
+  - Starts the local rails server (default at localhost:3000)
+- app/controllers/users_controller.rb
   - add methods:  
       index, show, edit, update, new, create, destroy  
-    add private method:
+  - add private method:
      
     ```ruby 
         def user_params  
           params.require(:user).permit(:username, :password, :email)  
         end  
     ```
-- Create views templates in users directory:
+- Create view templates in app/views/users directory:
   - edit, index, new, show
-- Add index to routes.rb
+- Add index to config/routes.rb
   
   ```ruby
   root "users#index"
   ```
-- add validations to models/user.rb (simple validation for now)
+- add validations to app/models/user.rb (simple validation for now)
   
   ```ruby
     validates :username, presence: true  
     validates :password, presence: true  
     validates :email, presence: true  
   ```
-- add _errors.html.erb template to views/shared*
-- add _flashes.html.erb template to views/layouts*
-- add simple _form.html.erb partial to views/users*
+- add _errors.html.erb template to app/views/shared*
+- add _flashes.html.erb template to app/views/layouts*
+- add simple _form.html.erb partial to app/views/users*
 - include partial in edit and new templates:
   
-  ```ruby
+  ```
   <%= render 'form' %>
   ```
-- add simple index.html.erb template to views/users*
-- add simple show.html.erb template to views/users*
-- add select all query to index action in users_controller.rb
+- add simple index.html.erb template to app/views/users*
+- add simple show.html.erb template to app/views/users*
+- add select all query to index action in app/controllers/users_controller.rb
   
   ```ruby
   @users = User.all
   ```
-- add single item selection to show and edit actions in users_controller.rb
+- add single item selection to show and edit actions in app/controllers/users_controller.rb
   
   ```ruby
   @user = User.find(params[:id])
   ```
-- add update item to update action in users_controller.rb
+- add update item to update action in app/controllers/users_controller.rb
   
   ```ruby
     @user = User.find(params[:id])  
@@ -67,33 +71,33 @@ _* indicates that there is an associate code example_
       render :edit  
     end  
   ```
-- add new item to new action in users_controller.rb
+- add new item to new action in app/controllers/users_controller.rb
   
   ```ruby
   @user = User.new
   ```
-- add create item to create action in users_controller.rb
+- add create item to create action in app/controllers/users_controller.rb
   
   ```ruby
-  @user = User.new(user_params)  
-  if @user.save  
-    redirect_to @user, notice: "User successfully created!"  
-  else  
-    render :new  
-  end  
+    @user = User.new(user_params)  
+    if @user.save  
+      redirect_to @user, notice: "User successfully created!"  
+    else  
+      render :new  
+    end  
   ```
-- add destroy item to destroy action in users_controller.rb
+- add destroy item to destroy action in app/controllers/users_controller.rb
   
   ```ruby
   @user = User.find(params[:id])  
   @user.destroy  
   redirect_to users_url, alert: "User successfully deleted!"  
   ```
-- create _nav.html.erb partial in views/layouts*
-- add the call for our partial to views/layouts/application.html.erb
+- create _nav.html.erb partial in app/views/layouts*
+- add the call for our partial to app/views/layouts/application.html.erb
   - (this can go above the call to yield for now)  
     
-    ```ruby
+    ```
     <%= render "layouts/nav" %>
     ```
 
@@ -103,7 +107,7 @@ _* indicates that there is an associate code example_
 _errors.html.erb
 ---
 
-```ruby
+```
 <% if object.errors.any? %>
 <section id="errors">
   <header>
@@ -127,7 +131,7 @@ _errors.html.erb
 _flashes.html.erb
 ---
 
-```ruby
+```
 <% flash.each do |key, value| %>
   <%= content_tag(:p, value, :class => "flash #{key}") %>
 <% end %>
@@ -137,7 +141,7 @@ _flashes.html.erb
 simple _form.html.erb
 ---
 
-```ruby
+```
 <%= form_for(@user) do |f| %>
   <%= render "shared/errors", object: @user %>
   <fieldset>
@@ -164,7 +168,7 @@ simple _form.html.erb
 simple index.html.erb
 ---
 
-```ruby
+```
 <ul>
   <% @users.each do |user| %>
     <li>
@@ -187,7 +191,7 @@ simple index.html.erb
 simple show.html.erb
 ---
 
-```ruby
+```
 <article>
   <header>
     <h1><%= @user.username %></h1>
@@ -216,7 +220,7 @@ simple show.html.erb
 _nav.html.erb
 ---
 
-```ruby
+```
 <nav>
   <ul>  
     <li>
