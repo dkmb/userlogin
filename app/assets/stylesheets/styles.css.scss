@@ -51,12 +51,12 @@ body {
 	height: 50px;
 	line-height: 50px;
 	background-color: $dark_color;
+	padding-left: 10px;
 }
 .userlogin-navigation-container {
 	max-width: 1000px;
 	width: 100%; 
 	margin: 0px auto;
-	padding-left: 20px;
 }
 .userlogin-navigation-container .userlogin-menu-link:hover,
 .userlogin-navigation-container .userlogin-menu-link:active {
@@ -74,7 +74,7 @@ body {
 	max-width: 1000px;
 	width: 100%; 
 	margin: 0px auto;
-	padding: 20px;
+	padding: 20px 0px 20px 0px;
 }
 
 /*
