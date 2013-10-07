@@ -104,7 +104,7 @@ _* indicates that there is an associated code example_
     ```
 
 ## Iteration Two
-> Design and Implementation
+> Design and Implementation. Many of the steps here have little to do with writing Rails specific code. However, this outlines how assets are managed in a Rails application. We also create a new controller to hold static pages like about and contact.
 ---
 > The sample app is now deployed to http://radiant-waters-7292.herokuapp.com and will be updated along with this repo
 ---
@@ -122,7 +122,41 @@ _* indicates that there is an associated code example_
   ```
 - create [styles.css.scss][7] in app/assets/stylesheets*
 - create [index.css.scss][8] in app/assets/stylesheets*
-
+- update [Gemfile][9] in root for future Heroku deployment*
+- Download Modernizr (http://modernizr.com)
+  - add Modernizr javascript to app/assets/javascripts
+  - add Modernizr css to app/assets/stylesheets
+- Download Normalize.css (http://necolas.github.io/normalize.css/)
+  - add Normalize.css to app/assets/stylesheets
+- create [_footer.html.erb][10] in app/views/layouts/*
+- create [_header.html.erb][11] in app/views/layouts/*
+- delete _nav.html.erb in app/views/layouts/
+- create [_navigation.html.erb][12] in app/views/layouts/*
+- create [_navlinks.html.erb][13] in app/views/layouts/*
+- update [application.html.erb][14] in app/views/layouts/*
+- create [index.html.erb][15] in app/views/users/*
+- create a home controller
+```
+  rails g controller home -T
+```
+- update [home_controller.rb][16] in app/controllers*
+- create about.html.erb in app/views/home/
+```
+  <h2>About</h2>
+```
+- create contact.html.erb app/views/home/
+```
+  <h2>Contact</h2>
+```
+- update config/routes.rb
+```
+  Userlogin::Application.routes.draw do
+    root 'users#index'
+    resources :users
+    get 'about' => 'home#about'
+    get 'contact' => 'home#contact'
+  end
+```
 
 ## Iteration Three
 
@@ -254,4 +288,342 @@ _* indicates that there is an associated code example_
     </li>
   </ul>
 </nav>
+```
+
+[7]: *styles.css.scss*
+```
+  @import "colors";
+
+  body {
+  	background-color: $light_color;
+  	color: $header_color;
+  }
+
+  /*
+   * Header
+   */
+  #userlogin-header { 
+  	height: 100px;
+  	background-color: $header_color;
+  }
+  #userlogin-title {
+  	max-width: 1000px;
+  	width: 100%; 
+  	margin: 0px auto;
+  }
+  .userlogin-title-text {
+  	margin: 0px;
+  	padding: 0px 0px 0px 10px;
+  	line-height: 100px;
+  }
+  .userlogin-title-link:link, .userlogin-title-link:visited {
+  	color: #fff;
+  	text-decoration: none;
+  }
+
+
+  /*
+   * Menu
+   */
+  .userlogin-menu-list {
+  	padding: 0px;
+  	margin: 0px;
+  }
+  .userlogin-menu-list-item {
+  	display: inline;	
+  	padding-right: 10px;
+  }
+  .userlogin-menu-link:link, .userlogin-menu-link:visited {
+  	color: #fff;
+  	text-decoration: none;
+  }
+
+  /*
+   * Top Navigation
+   */
+  #userlogin-navigation {
+  	height: 50px;
+  	line-height: 50px;
+  	background-color: $dark_color;
+  	padding-left: 10px;
+  }
+  .userlogin-navigation-container {
+  	max-width: 1000px;
+  	width: 100%; 
+  	margin: 0px auto;
+  }
+  .userlogin-navigation-container .userlogin-menu-link:hover,
+  .userlogin-navigation-container .userlogin-menu-link:active {
+  	text-decoration: underline;
+  	color: $lightest_color;
+  }
+
+  /*
+   * Content
+   */
+  #userlogin-container {
+  	background-color: #efefef;
+  }
+  #userlogin-content {
+  	max-width: 1000px;
+  	width: 100%; 
+  	margin: 0px auto;
+  	padding: 20px 0px 20px 0px;
+  }
+
+  /*
+   * Footer
+   */
+  #user-footer {
+  	background-color: $light_color;
+  }
+  .user-footer-navigation {
+  	max-width: 1000px;
+  	width: 100%;
+  	margin: 0px auto;
+  	text-align: center;
+  	padding-top: 20px;
+  	text-transform: uppercase;
+  	font-size: .8em;
+  }
+  .user-footer-navigation .userlogin-menu-link:hover,
+  .user-footer-navigation .userlogin-menu-link:active {
+  	text-decoration: underline;
+  	color: $darkest_color;
+  }
+  .user-footer-copyright {
+  	max-width: 1000px;
+  	width: 100%; 
+  	margin: 0px auto;
+  	color: #fff;
+  	text-align: center;
+  	font-size: .8em;
+  	padding: 20px 0px 20px 0px;
+  }
+  .user-footer-copyright-link:link, .user-footer-copyright-link:visited {
+  	color: #fff;
+  	text-decoration: underline;
+  }
+  .user-footer-copyright-link:hover, .user-footer-copyright-link:active {
+  	color: $darkest_color;
+  }
+```
+
+[8]: *index.css.scss* 
+```
+  @import "colors";
+
+  /*
+   * Login Box
+   */
+  .userlogin-loginbox {
+  	text-align: center;
+  }
+  .userlogin-loginbox-list {
+  	margin: 0px;
+  	padding: 0px;
+  }
+  .userlogin-loginbox-item {
+  	list-style-type: none;
+  	padding: 10px;
+  }
+  .userlogin-loginbox-link:link, .userlogin-loginbox-link:visited {
+  	display: inline-block;
+  	height: 100px;
+  	width: 300px;
+  	background-color: $dark_color;
+  	line-height: 100px;
+  	color: #fff;
+  	text-decoration: none;
+  	text-transform: uppercase;
+  	font-size: 2em;
+  	border: 1px solid $darkest_color;
+  }
+
+  /*
+   * User Listing
+   */
+  .userlogin-user-listing {
+  	border: 2px solid	#ccc;
+  	padding: 20px;
+  	text-align: center;
+  	background-color: #fff;
+  	width: 250px;
+  	margin: 0px auto;
+  }
+  .userlogin-user-list {
+  	text-align: left;
+  }
+  .userlogin-user-item {
+  	list-style-type: none;
+  	margin: 0px;
+  	padding: 0px;
+  }
+  .userlogin-user-item-article {
+  	padding: 5px 0px 5px 0px;
+  }
+  .userlogin-user-listing-title {
+  	padding: 0px;
+  	margin: 0px;
+  }
+  .userlogin-user-listing-link:link, .userlogin-user-listing-link:visited {
+  	color: #000;
+  	text-decoration: none;
+  }
+  .userlogin-user-listing-email {
+  	font-style: italic;
+  	margin: 0px;
+  	color: 
+  	#999;
+  	font-size: .9em;
+  }
+```
+
+[9]: *Gemfile* 
+```
+  source 'https://rubygems.org'
+  ruby '2.0.0'
+  #ruby-gemset=railstutorial_rails_4_0
+
+  gem 'rails', '4.0.0'
+
+  group :development do
+    gem 'sqlite3', '1.3.8'
+  end
+
+  gem 'sass-rails', '4.0.0'
+  gem 'uglifier', '2.1.1'
+  gem 'coffee-rails', '4.0.0'
+  gem 'jquery-rails', '3.0.4'
+  gem 'turbolinks', '1.1.1'
+  gem 'jbuilder', '1.0.2'
+
+  group :doc do
+    gem 'sdoc', '0.3.20', require: false
+  end
+
+  group :production do
+    gem 'pg', '0.15.1'
+    gem 'rails_12factor', '0.0.2'
+  end
+```
+
+[10]: *_footer.html.erb*
+```
+  <footer id="user-footer">
+    <div class="user-footer-navigation">
+      <%= render "layouts/navlinks" %>
+    </div>
+    <p class="user-footer-copyright">  
+      Copyright &copy; 2013 <a href="http://www.mitchellshelton.com" title="Visit mitchellshelton.com" class="user-footer-copyright-link">Mitchell Shelton</a>
+    </p>  
+  </footer>
+```
+
+[11]: *_header.html.erb*
+```
+  <header id="userlogin-header">
+    <div id="userlogin-title">
+      <h1 class="userlogin-title-text"><%= link_to 'UserLogin', root_path, class: "userlogin-title-link" %></h1>
+    </div>
+  </header>
+```
+
+[12]: *_navigation.html.erb*
+```
+  <nav id="userlogin-navigation">
+    <div class="userlogin-navigation-container">
+      <%= render "layouts/navlinks" %>
+    </div>
+  </nav>
+```
+
+[13]: *_navlinks.html.erb*
+```
+  <ul class="userlogin-menu-list">  
+    <li class="userlogin-menu-list-item">
+      <%= link_to "Home", root_path, class: "userlogin-menu-link" %>
+    </li>
+    <li class="userlogin-menu-list-item">
+      <%= link_to 'Register', new_user_path, class: "userlogin-menu-link" %>
+    </li>
+    <li class="userlogin-menu-list-item">
+      <%= link_to "Login", root_path, class: "userlogin-menu-link" %>
+    </li>
+    <li class="userlogin-menu-list-item">
+      <%= link_to "About", about_path, class: "userlogin-menu-link" %>
+    </li>
+    <li class="userlogin-menu-list-item">
+      <%= link_to "Contact", contact_path, class: "userlogin-menu-link" %>
+    </li>
+  </ul>
+```
+
+[14]: *application.html.erb*
+```
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Userlogin</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+  <%= render "layouts/header" %>
+  <%= render "layouts/navigation" %>
+  <div id="userlogin-container">
+    <div id="userlogin-content">
+      <%= yield %>
+    </div>
+  </div>
+  <%= render "layouts/footer" %>
+
+  </body>
+  </html>
+```
+
+[15]: *index.html.erb*
+```
+  <div class="userlogin-loginbox">
+    <ul class="userlogin-loginbox-list">
+      <li class="userlogin-loginbox-item">
+        <%= link_to "Register", new_user_path, class: "userlogin-loginbox-link"  %>
+      </li>
+      <li class="userlogin-loginbox-item">
+        <%= link_to "Login", root_path, class: "userlogin-loginbox-link" %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="userlogin-user-listing">
+    <ul class="userlogin-user-list">
+      <% @users.each do |user| %>
+        <li class="userlogin-user-item">
+          <article class="userlogin-user-item-article">
+            <h2 class="userlogin-user-listing-title">
+              <%= link_to(user.username, user, class: "userlogin-user-listing-link") %>
+            </h2>
+            <p class="userlogin-user-listing-email">
+              <%= user.email %>
+            </p>
+          </article>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+```
+
+[16]: *home_controller.rb*
+```
+  class HomeController < ApplicationController
+  
+    def about
+    end
+  
+    def contact
+    end
+  
+  end
 ```
